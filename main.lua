@@ -10,6 +10,8 @@ require '/states/PlayState'
 require '/states/TripState'
 require '/states/HelpState'
 
+
+--test
 --1280 800
 WINDOW_WIDTH = 1280	
 WINDOW_HEIGHT = 800
