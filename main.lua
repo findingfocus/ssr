@@ -13,13 +13,13 @@ require '/states/HelpState'
 
 --test
 --1280 800
-WINDOW_WIDTH = 1280	
-WINDOW_HEIGHT = 800
+--WINDOW_WIDTH = 1280
+--WINDOW_HEIGHT = 800
 
-
+local windowWidth, windowHeight = love.window.getDesktopDimensions()
 --600 375
 VIRTUAL_WIDTH = 1280	
-VIRTUAL_HEIGHT = 800
+VIRTUAL_HEIGHT = 720
 
 function love.load()
 	love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -40,7 +40,7 @@ function love.load()
 		['select'] = love.audio.newSource('music/select.wav', 'static')
 	}
 --]]
-	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, windowWidth, windowHeight, {
 		vsync = true,
 		fullscreen = true,
 		resizable = false
