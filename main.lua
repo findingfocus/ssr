@@ -7,17 +7,10 @@ require '/dependencies/BaseState'
 
 require '/states/TitleScreenState'
 require '/states/PlayState'
-require '/states/TripState'
 require '/states/HelpState'
 
+WINDOW_WIDTH, WINDOW_HEIGHT = love.window.getDesktopDimensions()
 
---test
---1280 800
---WINDOW_WIDTH = 1280
---WINDOW_HEIGHT = 800
-
-local windowWidth, windowHeight = love.window.getDesktopDimensions()
---600 375
 VIRTUAL_WIDTH = 1280	
 VIRTUAL_HEIGHT = 720
 
@@ -26,9 +19,13 @@ function love.load()
 
 	love.window.setTitle('SSR')
 
-	titleScreen = love.graphics.newImage('/pictures/titleScreen.png')
+	love.mouse.setVisible(false)
+
+	titleScreen = love.graphics.newImage('/pictures/SSR_title.png')
+	tongs = love.graphics.newImage('/pictures/SSR_tongs.png')
 
 	bubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 40)
+	tinyBubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 24)
 	comicFont = love.graphics.newFont('fonts/amateurcomic.ttf', 40)
 	love.graphics.setFont(bubbleFont)
 
@@ -40,7 +37,7 @@ function love.load()
 		['select'] = love.audio.newSource('music/select.wav', 'static')
 	}
 --]]
-	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, windowWidth, windowHeight, {
+	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
 		vsync = true,
 		fullscreen = true,
 		resizable = false
@@ -69,6 +66,11 @@ function love.keypressed(key)
 	if key == 'escape' then
 		love.event.quit()
 	end
+
+	if key == "tab" then
+			local state = not love.mouse.isVisible()
+			love.mouse.setVisible(state)
+		end
 end
 
 function love.keyboard.wasPressed(key)
