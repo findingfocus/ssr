@@ -12,3 +12,4 @@ require '/src/states/PlayState'
 require '/src/states/HelpState'
 
 require 'src/Stephen'
+require 'src/Level'

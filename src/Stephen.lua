@@ -41,26 +41,27 @@ function Stephen:update(dt)
 
 
 		-- detects if on top floor
-		if self.y == 0 then
+		if self.y == 30 then
 			topLevel = true
 			onLadder = false
 		end
 
-		self.y = math.max(0, self.y - PLAYER_SPEED * dt)
+		self.y = math.max(30, self.y - PLAYER_SPEED * dt)
 	end
 
 	if love.keyboard.isDown('down') and ladderArea then
 		onLadder = true
 		self.x = 220
-		if self.y == VIRTUAL_HEIGHT - self.height then
+		if self.y == VIRTUAL_HEIGHT - 220 then
 			topLevel = false
 			onLadder = false
 		end
-		self.y = math.min(VIRTUAL_HEIGHT - self.height,self.y + PLAYER_SPEED * dt)
+		self.y = math.min(VIRTUAL_HEIGHT - 220,self.y + PLAYER_SPEED * dt)
 	end
 
 end
 
 function Stephen:render()
+	love.graphics.setColor(255/255, 70/255, 70/255, 255/255)
 	love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end

@@ -38,7 +38,9 @@ function love.load()
 
 	gStateMachine:change('titleState')
 
-	stephen = Stephen(0, VIRTUAL_HEIGHT - 130, 200, 130)
+	stephen = Stephen(0, VIRTUAL_HEIGHT - 220, 200, 130)
+
+	levelOutline = Level()
 
 	love.keyboard.keysPressed = {}
 
