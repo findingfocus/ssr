@@ -31,14 +31,16 @@ function Stephen:update(dt)
 	end
 
 	if love.keyboard.isDown('right') and not onLadder then
-		self.x = math.min(VIRTUAL_WIDTH - self.width, self.x + PLAYER_SPEED * dt) 
+		if topLevel == true then
+			self.x = math.min(VIRTUAL_WIDTH - 480 - self.width, self.x + PLAYER_SPEED * dt)
+		else
+			self.x = math.min(VIRTUAL_WIDTH - self.width - 280, self.x + PLAYER_SPEED * dt)  
+		end
 	end
 
 	if love.keyboard.isDown('up') and ladderArea then
 		onLadder = true
 		self.x = 220
-
-
 
 		-- detects if on top floor
 		if self.y == 30 then
