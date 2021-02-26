@@ -16,9 +16,6 @@ function love.load()
 	love.graphics.setFont(bubbleFont)
 
 	sounds = {
-		--['titleMusic'] = love.audio.newSource('music/titlemusic.mp3', 'static'),
-		--['playMusic'] = love.audio.newSource('music/playstatemusic.mp3', 'static'),
-		--['tripMusic'] = love.audio.newSource('music/trippingmusic.mp3', 'static'),
 		['beep'] = love.audio.newSource('music/beep.wav', 'static'),
 		['select'] = love.audio.newSource('music/select.wav', 'static')
 	}
