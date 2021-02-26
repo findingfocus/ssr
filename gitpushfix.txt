@@ -1,1 +1,0 @@
-git config --global remote.origin.receivepack "git receive-pack"

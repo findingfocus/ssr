@@ -1,18 +1,4 @@
-push = require '/dependencies/push'
-
-Class = require 'dependencies/class'
-
-require '/dependencies/StateMachine'
-require '/dependencies/BaseState'
-
-require '/states/TitleScreenState'
-require '/states/PlayState'
-require '/states/HelpState'
-
-WINDOW_WIDTH, WINDOW_HEIGHT = love.window.getDesktopDimensions()
-
-VIRTUAL_WIDTH = 1280	
-VIRTUAL_HEIGHT = 720
+require 'src/dependencies'
 
 function love.load()
 	love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -36,7 +22,7 @@ function love.load()
 		['beep'] = love.audio.newSource('music/beep.wav', 'static'),
 		['select'] = love.audio.newSource('music/select.wav', 'static')
 	}
---]]
+
 	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
 		vsync = true,
 		fullscreen = true,
@@ -52,7 +38,10 @@ function love.load()
 
 	gStateMachine:change('titleState')
 
+	stephen = Stephen(0, VIRTUAL_HEIGHT - 130, 200, 130)
+
 	love.keyboard.keysPressed = {}
+
 
 end
 
@@ -82,17 +71,12 @@ function love.keyboard.wasPressed(key)
 end
 
 
-
-
-
 function love.update(dt)
 
 	gStateMachine:update(dt)
 
 	love.keyboard.keysPressed = {} 
 end
-
-
 
 function love.draw()
 	push:start()
