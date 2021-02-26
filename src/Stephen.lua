@@ -53,6 +53,7 @@ function Stephen:update(dt)
 		onLadder = true
 		self.x = 220
 		if self.y == VIRTUAL_HEIGHT - self.height then
+			topLevel = false
 			onLadder = false
 		end
 		self.y = math.min(VIRTUAL_HEIGHT - self.height,self.y + PLAYER_SPEED * dt)
