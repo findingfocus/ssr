@@ -13,7 +13,7 @@ function PlayState:update(dt)
 		--sounds['playMusic']:stop()
 		gStateMachine:change('titleState')
 	end
-
+	bottomWeiner:update(dt)
 	stephen:update(dt)
 
 
@@ -24,6 +24,7 @@ function PlayState:render()
 	love.graphics.clear(100/255, 110/255, 200/255, 255/255)
 	levelOutline:render()
 	stephen:render()
+	bottomWeiner:render()
 	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
 end 
 

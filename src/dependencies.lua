@@ -13,3 +13,4 @@ require '/src/states/HelpState'
 
 require 'src/Stephen'
 require 'src/Level'
+require 'src/Weiner'

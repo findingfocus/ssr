@@ -2,3 +2,5 @@ WINDOW_WIDTH, WINDOW_HEIGHT = love.window.getDesktopDimensions()
 
 VIRTUAL_WIDTH = 1280	
 VIRTUAL_HEIGHT = 720
+
+PLATE_WIDTH = 100

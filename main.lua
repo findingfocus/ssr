@@ -37,6 +37,10 @@ function love.load()
 
 	stephen = Stephen(0, VIRTUAL_HEIGHT - 220, 200, 130)
 
+	bottomWeiner = Weiner(VIRTUAL_WIDTH - 380 - (2 * PLATE_WIDTH), VIRTUAL_HEIGHT - 190, 100, 100)
+
+	topWeiner  = Weiner()
+
 	levelOutline = Level()
 
 	love.keyboard.keysPressed = {}
