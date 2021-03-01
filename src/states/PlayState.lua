@@ -10,9 +10,11 @@ function PlayState:update(dt)
 	end
 
 	if love.keyboard.wasPressed('r') then
-		--sounds['playMusic']:stop()
-		gStateMachine:change('titleState')
+		stephen:reset()
+		topWeiner:reset()
+		bottomWeiner:reset()
 	end
+
 	bottomWeiner:update(dt)
 	topWeiner:update(dt)
 	stephen:update(dt)

@@ -1,6 +1,6 @@
 Weiner = Class{}
 
-local fallSpeed = 300
+local fallSpeed = 600
 
 function Weiner:init(x, y, width, height)
 	self.width = 90
@@ -8,6 +8,13 @@ function Weiner:init(x, y, width, height)
 	self.x = x
 	self.y = y
 	pushedOff = false
+	SPAWNX = x
+	SPAWNY = y
+end
+
+function Weiner:reset()
+	self.x = SPAWNX
+	self.y = SPAWNY
 end
 
 function Weiner:update(dt)

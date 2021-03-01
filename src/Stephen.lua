@@ -13,6 +13,13 @@ function Stephen:init(x, y, width, height)
 	self.height = height
 end
 
+function Stephen:reset()
+	self.x = 0
+	self.y = VIRTUAL_HEIGHT - 220
+	self.width = 200
+	self.height = 130
+end
+
 function Stephen:update(dt)
 
 	if self.x > 210 and self.x < 230 then

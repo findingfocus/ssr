@@ -29,11 +29,10 @@ function love.load()
 	gStateMachine = StateMachine {
 		['titleState'] = function() return TitleScreenState() end,
 		['playState'] = function() return PlayState() end,
-		['tripState'] = function() return TripState() end,
 		['helpState'] = function() return HelpState() end
 	}
 
-	gStateMachine:change('titleState')
+	gStateMachine:change('playState')
 
 	stephen = Stephen(0, VIRTUAL_HEIGHT - 220, 200, 130)
 
