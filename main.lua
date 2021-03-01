@@ -37,9 +37,9 @@ function love.load()
 
 	stephen = Stephen(0, VIRTUAL_HEIGHT - 220, 200, 130)
 
-	bottomWeiner = Weiner(VIRTUAL_WIDTH - 380 - (2 * PLATE_WIDTH), VIRTUAL_HEIGHT - 190, 100, 100)
+	bottomWeiner = Weiner(VIRTUAL_WIDTH - 380 - (2* PLATE_WIDTH), VIRTUAL_HEIGHT - 190, 100, 100)
 
-	topWeiner  = Weiner()
+	topWeiner  = Weiner(VIRTUAL_WIDTH - 380 - (3 * PLATE_WIDTH), stephen.height + 30 - PLATE_WIDTH, 100, 100)
 
 	levelOutline = Level()
 

@@ -32,7 +32,7 @@ function Stephen:update(dt)
 
 	if love.keyboard.isDown('right') and not onLadder then
 		if topLevel == true then
-			self.x = math.min(VIRTUAL_WIDTH - 480 - self.width, self.x + PLAYER_SPEED * dt)
+			self.x = math.min(VIRTUAL_WIDTH - 480, self.x + PLAYER_SPEED * dt)
 		else
 			self.x = math.min(VIRTUAL_WIDTH - self.width - 280, self.x + PLAYER_SPEED * dt)  
 		end
