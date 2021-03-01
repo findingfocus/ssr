@@ -11,6 +11,7 @@ function Stephen:init(x, y, width, height)
 	self.y = y
 	self.width = width
 	self.height = height
+	topLevel = false
 end
 
 function Stephen:reset()
