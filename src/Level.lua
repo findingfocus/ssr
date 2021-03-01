@@ -31,7 +31,7 @@ love.graphics.rectangle('fill', 0, VIRTUAL_HEIGHT - 90, VIRTUAL_WIDTH, 90)
 --bottom plate
 love.graphics.setColor(255/255, 68/255, 0/255, 255/255)
 love.graphics.rectangle('fill', VIRTUAL_WIDTH - 380 + PLATE_WIDTH, VIRTUAL_HEIGHT - 90, PLATE_WIDTH, 20)
-love.graphics.rectangle('fill', VIRTUAL_WIDTH - 380 + (3 * PLATE_WIDTH), VIRTUAL_HEIGHT - 90, PLATE_WIDTH, 20)
+love.graphics.rectangle('fill', VIRTUAL_WIDTH - 380 + (2 * PLATE_WIDTH), VIRTUAL_HEIGHT - 90, PLATE_WIDTH, 20)
 --top plates
 love.graphics.rectangle('fill', VIRTUAL_WIDTH - 380 - (2 * PLATE_WIDTH), stephen.height + 30, PLATE_WIDTH, 20)
 love.graphics.rectangle('fill', VIRTUAL_WIDTH - 380 - PLATE_WIDTH, stephen.height + 30, PLATE_WIDTH, 20)

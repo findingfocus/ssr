@@ -13,7 +13,7 @@ end
 function Weiner:update(dt)
 
 	--update self.x if stephen.x + steven.width > self.x
-	if stephen.x + stephen.width > self.x and self.y == stephen.y - stephen.height then
+	if stephen.x + stephen.width > self.x and self.y > stephen.y - stephen.height then
 		self.x = stephen.x + stephen.width
 	end
 
