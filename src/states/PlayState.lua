@@ -11,8 +11,8 @@ function PlayState:update(dt)
 
 	if love.keyboard.wasPressed('r') then
 		stephen:reset()
-		topWeiner:reset()
-		bottomWeiner:reset()
+		topWeiner:topReset()
+		bottomWeiner:bottomReset()
 	end
 
 	bottomWeiner:update(dt)

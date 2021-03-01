@@ -12,21 +12,29 @@ function Weiner:init(x, y, width, height)
 	SPAWNY = y
 end
 
-function Weiner:reset()
-	self.x = SPAWNX
-	self.y = SPAWNY
+function Weiner:topReset()
+	self.pushedOff = false
+	self.x = VIRTUAL_WIDTH - 380 - (3 * PLATE_WIDTH)
+	self.y = stephen.height + 30 - PLATE_WIDTH
+end
+
+function Weiner:bottomReset()
+	self.pushedOff = false
+	self.x = VIRTUAL_WIDTH - 380 - (2* PLATE_WIDTH)
+	self.y = VIRTUAL_HEIGHT - 190
 end
 
 function Weiner:update(dt)
 
 	--update self.x if stephen.x + steven.width > self.x
-	if stephen.x + stephen.width > self.x and self.y > stephen.y - stephen.height then
-		self.x = stephen.x + stephen.width
-	end
 
 	if self.pushedOff then
 		self.x = VIRTUAL_WIDTH - 380
 		self.y = math.min(VIRTUAL_HEIGHT - self.height, self.y + fallSpeed * dt)
+	else
+		if stephen.x + stephen.width > self.x and self.y > stephen.y - stephen.height then
+			self.x = stephen.x + stephen.width
+		end
 	end	
 
 ---[[
