@@ -4,14 +4,26 @@ PLAYER_SPEED = 350
 local grounded = true
 local ladderArea = false
 local onLadder = false
-local topLevel = false
 
 function Stephen:init(x, y, width, height)
 	self.x = x
 	self.y = y
 	self.width = width
 	self.height = height
-	topLevel = false
+	self.fallen = false
+	self.topLevel = false
+end
+
+function Stephen:collides(weiner)
+	if self.x > weiner.x + weiner.width or weiner.x > self.x + self.width then
+		return false
+	end
+
+	if self.y > weiner.y + weiner.height or weiner.y > self.y + self.height then
+		return false
+	end
+
+	return true
 end
 
 function Stephen:reset()
@@ -19,6 +31,7 @@ function Stephen:reset()
 	self.y = VIRTUAL_HEIGHT - 220
 	self.width = 200
 	self.height = 130
+	self.topLevel = false
 end
 
 function Stephen:update(dt)
@@ -31,7 +44,7 @@ function Stephen:update(dt)
 
 	if love.keyboard.isDown('left') and not onLadder then
 
-		if topLevel == true then
+		if self.topLevel == true then
 			self.x = math.max(220 ,self.x - PLAYER_SPEED * dt)
 		else
 			self.x = math.max(0, self.x - PLAYER_SPEED * dt)
@@ -39,13 +52,20 @@ function Stephen:update(dt)
 	end
 
 	if love.keyboard.isDown('right') and not onLadder then
-		if topLevel == true then
+		--kickback for burnt toes
+		if self.topLevel == true then
 			self.x = math.min(VIRTUAL_WIDTH - 575, self.x + PLAYER_SPEED * dt)
 			if self.x == VIRTUAL_WIDTH - 575 then
 				self.x = VIRTUAL_WIDTH - 680
 			end
+		elseif topWeiner.fallen and topWeiner.y < VIRTUAL_HEIGHT - topWeiner.height then
+			self.x = math.min(VIRTUAL_WIDTH - self.width - 290, self.x + PLAYER_SPEED * dt)
 		else
-			self.x = math.min(VIRTUAL_WIDTH - self.width - 280, self.x + PLAYER_SPEED * dt)  
+			self.x = math.min(VIRTUAL_WIDTH - self.width - 80, self.x + PLAYER_SPEED * dt)
+			if self.x == VIRTUAL_WIDTH - self.width - 80 then  
+				self.x = VIRTUAL_WIDTH - self.width - 185
+			end
+
 		end
 	end
 
@@ -55,7 +75,7 @@ function Stephen:update(dt)
 
 		-- detects if on top floor
 		if self.y == 30 then
-			topLevel = true
+			self.topLevel = true
 			onLadder = false
 		end
 
@@ -66,7 +86,7 @@ function Stephen:update(dt)
 		onLadder = true
 		self.x = 220
 		if self.y == VIRTUAL_HEIGHT - 220 then
-			topLevel = false
+			self.topLevel = false
 			onLadder = false
 		end
 		self.y = math.min(VIRTUAL_HEIGHT - 220,self.y + PLAYER_SPEED * dt)

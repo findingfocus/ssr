@@ -32,7 +32,7 @@ function love.load()
 		['helpState'] = function() return HelpState() end
 	}
 
-	gStateMachine:change('playState')
+	gStateMachine:change('titleState')
 
 	stephen = Stephen(0, VIRTUAL_HEIGHT - 220, 200, 130)
 
