@@ -12,6 +12,7 @@ function Stephen:init(x, y, width, height)
 	self.height = height
 	self.fallen = false
 	self.topLevel = false
+	self.image = love.graphics.newImage('/pictures/SSR_Stephen.png')
 end
 
 function Stephen:collides(weiner)
@@ -95,6 +96,6 @@ function Stephen:update(dt)
 end
 
 function Stephen:render()
-	love.graphics.setColor(255/255, 50/255, 50/255, 255/255)
-	love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
+	love.graphics.draw(self.image, self.x, self.y + 15)
 end

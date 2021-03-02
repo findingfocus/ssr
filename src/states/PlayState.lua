@@ -26,9 +26,8 @@ end
 function PlayState:render()
 	love.graphics.clear(100/255, 110/255, 200/255, 255/255)
 	levelOutline:render()
-	stephen:render()
 	topWeiner:render()
 	bottomWeiner:render()
-	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
+	stephen:render()
 end 
 
