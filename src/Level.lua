@@ -17,13 +17,13 @@ love.graphics.rectangle('fill', 220, stephen.height + 30, VIRTUAL_WIDTH - 600, 9
 --Ladder Stand-In
 --110 wide
 love.graphics.setColor(100/255, 20/255, 20/255, 255/255)
-love.graphics.rectangle('fill', 220, stephen.height + 30, 110, VIRTUAL_HEIGHT - stephen.height + 30)
+love.graphics.rectangle('fill', 220, stephen.height + 30, 110, VIRTUAL_HEIGHT - (stephen.height + 30) - 100)
 
 
 --Ground Stand-In
 --220 from bottom
 love.graphics.setColor(192/255, 143/255, 94/255, 255/255)
-love.graphics.rectangle('fill', 0, VIRTUAL_HEIGHT - 90, VIRTUAL_WIDTH, 90)
+love.graphics.rectangle('fill', 0, VIRTUAL_HEIGHT - 100, VIRTUAL_WIDTH, 100)
 
 
 
@@ -44,6 +44,6 @@ love.graphics.rectangle('fill', VIRTUAL_WIDTH - 380 - PLATE_WIDTH, stephen.heigh
 
 --Empty Trap Stand-In
 love.graphics.setColor(0/255, 0/255, 0/255, 255/255)
-love.graphics.rectangle('fill', VIRTUAL_WIDTH - 380, VIRTUAL_HEIGHT - 90, 100, 100)
+love.graphics.rectangle('fill', VIRTUAL_WIDTH - 400, VIRTUAL_HEIGHT - 100, 100, 100)
 
 end

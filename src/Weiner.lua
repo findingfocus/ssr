@@ -3,8 +3,8 @@ Weiner = Class{}
 local fallSpeed = 600
 
 function Weiner:init(x, y, width, height)
-	self.width = 90
-	self.height = 90
+	self.width = 100
+	self.height = 100
 	self.x = x
 	self.y = y
 	pushedOff = false
@@ -79,5 +79,5 @@ end
 
 function Weiner:render()
 	love.graphics.setColor(193/255, 58/255, 0/255, 255/255)
-	love.graphics.rectangle('fill', self.x, self.y, 100, 100)
+	love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
