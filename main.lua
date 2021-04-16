@@ -34,11 +34,12 @@ function love.load()
 
 	gStateMachine:change('titleState')
 
-	stephen = Stephen(0, VIRTUAL_HEIGHT - 220, 200, 130)
+	stephen = Stephen(0, GROUND_FLOOR_STEPHENY, 200, 130)
 
-	bottomWeiner = Weiner(VIRTUAL_WIDTH - 380 - (2* PLATE_WIDTH), VIRTUAL_HEIGHT - 190, 100, 100)
-
-	topWeiner  = Weiner(VIRTUAL_WIDTH - 380 - (3 * PLATE_WIDTH), stephen.height + 30 - PLATE_WIDTH, 100, 100)
+	bottomWeiner = Weiner(VIRTUAL_WIDTH - (PLATE_WIDTH * 6), VIRTUAL_HEIGHT - FLOOR_HEIGHT - WEINER_GIRTH, WEINER_GIRTH, WEINER_GIRTH)
+	
+	topWeiner  = Weiner(VIRTUAL_WIDTH - (PLATE_WIDTH * 7), TOP_FLOORY - WEINER_GIRTH, WEINER_GIRTH, WEINER_GIRTH)
+	--Weiner(VIRTUAL_WIDTH - 380 - (3 * PLATE_WIDTH), stephen.height + 30 - PLATE_WIDTH, 100, 100)
 
 	levelOutline = Level()
 

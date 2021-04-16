@@ -86,16 +86,16 @@ function Stephen:update(dt)
 	if love.keyboard.isDown('down') and ladderArea then
 		onLadder = true
 		self.x = 220
-		if self.y == VIRTUAL_HEIGHT - 220 then
+		if self.y == GROUND_FLOOR_STEPHENY then
 			self.topLevel = false
 			onLadder = false
 		end
-		self.y = math.min(VIRTUAL_HEIGHT - 220,self.y + PLAYER_SPEED * dt)
+		self.y = math.min(GROUND_FLOOR_STEPHENY, self.y + PLAYER_SPEED * dt)
 	end
 
 end
 
 function Stephen:render()
 	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
-	love.graphics.draw(self.image, self.x, self.y + 15)
+	love.graphics.draw(self.image, self.x, self.y + 18)
 end
