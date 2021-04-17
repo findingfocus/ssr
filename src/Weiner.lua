@@ -55,6 +55,12 @@ function Weiner:update(dt)
 		topWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
 		topWeiner.y = math.min(VIRTUAL_HEIGHT - topWeiner.height, topWeiner.y + fallSpeed * dt)
 	end
+---[[
+	if topWeiner.y == VIRTUAL_HEIGHT - (WEINER_GIRTH * 2) then
+		topWeiner.y = VIRTUAL_HEIGHT - (WEINER_GIRTH * 2)
+		topWeiner.pushedOff = false
+	end
+--]]
 
 	if bottomWeiner.pushedOff then
 		bottomWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
@@ -63,6 +69,7 @@ function Weiner:update(dt)
 
 	--stacks weiners if fallen on top of one another
 	if topWeiner:collides(bottomWeiner) then
+		topWeiner.pushedOff = false
 		stackedOffset = topWeiner.x - bottomWeiner.x 
 		topWeiner.y = bottomWeiner.y - 100
 		topWeiner.x = bottomWeiner.x + stackedOffset

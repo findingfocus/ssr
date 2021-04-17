@@ -1,6 +1,6 @@
 Stephen = Class{}
 
-PLAYER_SPEED = 350
+PLAYER_SPEED = 950
 local grounded = true
 local ladderArea = false
 local onLadder = false
@@ -59,8 +59,6 @@ function Stephen:update(dt)
 			if self.x == VIRTUAL_WIDTH - 575 then
 				self.x = VIRTUAL_WIDTH - 680
 			end
-		elseif topWeiner.fallen and topWeiner.y < VIRTUAL_HEIGHT - topWeiner.height then
-			self.x = math.min(VIRTUAL_WIDTH - self.width - 290, self.x + PLAYER_SPEED * dt)
 		else
 			self.x = math.min(VIRTUAL_WIDTH - self.width - 80, self.x + PLAYER_SPEED * dt)
 			if self.x == VIRTUAL_WIDTH - self.width - 80 then  
@@ -68,6 +66,7 @@ function Stephen:update(dt)
 			end
 
 		end
+
 	end
 
 	if love.keyboard.isDown('up') and ladderArea then
