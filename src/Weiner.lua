@@ -1,6 +1,7 @@
 Weiner = Class{}
 
 local fallSpeed = 600
+local stackedOffset
 
 function Weiner:init(x, y, width, height)
 	self.width = 100
@@ -25,27 +26,28 @@ function Weiner:collides(weiner)
 
 function Weiner:topReset()
 	self.pushedOff = false
-	self.x = VIRTUAL_WIDTH - 380 - (3 * PLATE_WIDTH)
-	self.y = stephen.height + 30 - PLATE_WIDTH
+	self.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 7)
+	self.y = TOP_FLOORY - WEINER_GIRTH
 	self.fallen = false
 end
 
 function Weiner:bottomReset()
 	self.pushedOff = false
-	self.x = VIRTUAL_WIDTH - 380 - (2* PLATE_WIDTH)
-	self.y = VIRTUAL_HEIGHT - 190
+	self.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 6)
+	self.y = VIRTUAL_HEIGHT - FLOOR_HEIGHT - WEINER_GIRTH
 	self.fallen = false
 end
+
 
 function Weiner:update(dt)
 
 	--pushes weiners to the right once collided
 	if stephen:collides(topWeiner) then
-			topWeiner.x = stephen.x + stephen.width
+			topWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
 	end
 
 	if stephen:collides(bottomWeiner) then
-			bottomWeiner.x = stephen.x + stephen.width
+			bottomWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
 	end
 
 	--clamps falling at floor level
@@ -61,7 +63,9 @@ function Weiner:update(dt)
 
 	--stacks weiners if fallen on top of one another
 	if topWeiner:collides(bottomWeiner) then
+		stackedOffset = topWeiner.x - bottomWeiner.x 
 		topWeiner.y = bottomWeiner.y - 100
+		topWeiner.x = bottomWeiner.x + stackedOffset
 	end
 
 
