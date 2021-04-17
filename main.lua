@@ -9,6 +9,7 @@ function love.load()
 
 	titleScreen = love.graphics.newImage('/pictures/SSR_title.png')
 	tongs = love.graphics.newImage('/pictures/SSR_tongs.png')
+	halo = love.graphics.newImage('/pictures/SSR_Halo.png')
 
 	bubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 40)
 	tinyBubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 24)

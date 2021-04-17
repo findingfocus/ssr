@@ -1,6 +1,6 @@
 Stephen = Class{}
 
-PLAYER_SPEED = 950
+PLAYER_SPEED = 1300
 local grounded = true
 local ladderArea = false
 local onLadder = false
@@ -13,6 +13,7 @@ function Stephen:init(x, y, width, height)
 	self.fallen = false
 	self.topLevel = false
 	self.image = love.graphics.newImage('/pictures/SSR_Stephen.png')
+	self.winState = false
 end
 
 function Stephen:collides(weiner)
@@ -33,6 +34,7 @@ function Stephen:reset()
 	self.width = 200
 	self.height = 130
 	self.topLevel = false
+	self.winState = false
 end
 
 function Stephen:update(dt)
@@ -60,13 +62,17 @@ function Stephen:update(dt)
 				self.x = VIRTUAL_WIDTH - 680
 			end
 		else
-			self.x = math.min(VIRTUAL_WIDTH - self.width - 80, self.x + PLAYER_SPEED * dt)
+			--Stephens right clamping behavior
+			if stephen.winState and stephen.x == 0 then
+				stephen.x = 0
+			else
+				self.x = math.min(VIRTUAL_WIDTH - self.width - 80, self.x + PLAYER_SPEED * dt)
+			end
+
 			if self.x == VIRTUAL_WIDTH - self.width - 80 then  
 				self.x = VIRTUAL_WIDTH - self.width - 185
 			end
-
 		end
-
 	end
 
 	if love.keyboard.isDown('up') and ladderArea then
@@ -90,6 +96,11 @@ function Stephen:update(dt)
 			onLadder = false
 		end
 		self.y = math.min(GROUND_FLOOR_STEPHENY, self.y + PLAYER_SPEED * dt)
+	end
+
+	--triggers winState
+	if topWeiner.x == 1180 and bottomWeiner.y == 620 then
+		self.winState = true
 	end
 
 end

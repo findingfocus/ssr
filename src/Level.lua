@@ -5,6 +5,9 @@ function Level:init()
 end
 
 function Level:update()
+	if topWeiner.y == VIRTUAL_HEIGHT - FLOOR_HEIGHT and bottomWeiner.y == VIRTUAL_WIDTH - WEINER_GIRTH then
+		stephen.winState = true
+	end
 
 end
 
@@ -46,4 +49,5 @@ love.graphics.rectangle('fill', VIRTUAL_WIDTH - (PLATE_WIDTH * 5), TOP_FLOORY, P
 love.graphics.setColor(0/255, 0/255, 0/255, 255/255)
 love.graphics.rectangle('fill', VIRTUAL_WIDTH - (PLATE_WIDTH * 4), VIRTUAL_HEIGHT - FLOOR_HEIGHT, PLATE_WIDTH, PLATE_WIDTH)
 
+--Halo
 end

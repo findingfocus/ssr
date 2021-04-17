@@ -10,6 +10,7 @@ function Weiner:init(x, y, width, height)
 	self.y = y
 	pushedOff = false
 	fallen = false
+	stackedOffset = 0
 end
 
 function Weiner:collides(weiner)
@@ -53,7 +54,7 @@ function Weiner:update(dt)
 	--clamps falling at floor level
 	if topWeiner.pushedOff then
 		topWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
-		topWeiner.y = math.min(VIRTUAL_HEIGHT - topWeiner.height, topWeiner.y + fallSpeed * dt)
+		topWeiner.y = math.min(VIRTUAL_HEIGHT - WEINER_GIRTH, topWeiner.y + fallSpeed * dt)
 	end
 ---[[
 	if topWeiner.y == VIRTUAL_HEIGHT - (WEINER_GIRTH * 2) then
@@ -89,6 +90,6 @@ function Weiner:update(dt)
 end
 
 function Weiner:render()
-	love.graphics.setColor(193/255, 58/255, 0/255, 255/255)
+	love.graphics.setColor(54/255, 138/255, 50/255, 255/255)
 	love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
