@@ -47,12 +47,21 @@ function Weiner:update(dt)
 
 	--pushes weiners to the right once collided
 	if stephen:collides(topWeiner) then
-			topWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
+		topWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
 	end
 
 	if stephen:collides(bottomWeiner) then
-			bottomWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
+		bottomWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
 	end
+
+	--stacks weiners if fallen on top of one another
+	if topWeiner:collides(bottomWeiner) then
+		stackedOffset = topWeiner.x - bottomWeiner.x 
+		topWeiner.pushedOff = false
+		topWeiner.fallen = false
+		topWeiner.y = bottomWeiner.y - WEINER_GIRTH
+	end
+
 
 	--clamps falling at floor level
 	if topWeiner.pushedOff then
@@ -71,14 +80,6 @@ function Weiner:update(dt)
 		bottomWeiner.y = math.min(VIRTUAL_HEIGHT - WEINER_GIRTH, bottomWeiner.y + fallSpeed * dt)
 	end
 
-	--stacks weiners if fallen on top of one another
-	if topWeiner:collides(bottomWeiner) then
-		stackedOffset = topWeiner.x - bottomWeiner.x 
-		topWeiner.pushedOff = false
-		topWeiner.fallen = false
-		topWeiner.y = bottomWeiner.y - WEINER_GIRTH
-	end
-
 
 	--trigger top weiner to fall if first pushed off
 	if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 4) and not topWeiner.fallen then
@@ -89,12 +90,11 @@ function Weiner:update(dt)
 	if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 3) then
 		topWeiner.burnt = true
 	end
----[[
+
+	--flushes pushedOff so topweiner x is free to move again
 	if topWeiner.y == VIRTUAL_HEIGHT - WEINER_GIRTH * 2 and bottomWeiner.fallen then
-		topWeiner.fallen = false
 		topWeiner.pushedOff = false
 	end
---]]
 
 end
 
@@ -116,4 +116,5 @@ function Weiner:render()
 	love.graphics.print('topWeiner.fallen: ' .. tostring(topWeiner.fallen), 0, increment * 2)
 	love.graphics.print('stackedOffset = ' .. tostring(stackedOffset), 0, increment * 3)
 	love.graphics.print('topWeiner.y = ' .. tostring(topWeiner.y), 0, increment * 4)
+	love.graphics.print('topWeiner.pushedOff = ' .. tostring(topWeiner.pushedOff), 0, increment * 5)
 end
