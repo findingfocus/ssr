@@ -47,10 +47,12 @@ function Level:render()
 
 	--Empty Trap Stand-In
 	love.graphics.setColor(0/255, 0/255, 0/255, 255/255)
-	if topWeiner.y == 620 then
-		love.graphics.rectangle('fill', VIRTUAL_WIDTH - (PLATE_WIDTH * 4), VIRTUAL_HEIGHT - FLOOR_HEIGHT - 1, PLATE_WIDTH, PLATE_WIDTH)
+	if topWeiner.y == 621 then
+		love.graphics.setColor(54/255, 138/255, 50/255, 255/255)
+		love.graphics.rectangle('fill', VIRTUAL_WIDTH - (PLATE_WIDTH * 4), VIRTUAL_HEIGHT - FLOOR_HEIGHT, PLATE_WIDTH, PLATE_WIDTH)
 	else
-			love.graphics.rectangle('fill', VIRTUAL_WIDTH - (PLATE_WIDTH * 4), VIRTUAL_HEIGHT - FLOOR_HEIGHT, PLATE_WIDTH, PLATE_WIDTH)
+		love.graphics.setColor(0/255, 0/255, 0/255, 255/255)
+		love.graphics.rectangle('fill', VIRTUAL_WIDTH - (PLATE_WIDTH * 4), VIRTUAL_HEIGHT - FLOOR_HEIGHT, PLATE_WIDTH, PLATE_WIDTH)
 	end
 
 

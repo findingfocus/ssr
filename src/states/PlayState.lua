@@ -35,7 +35,7 @@ function PlayState:render()
 	--Debug
 	love.graphics.setFont(tinyBubbleFont)
 	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
-	love.graphics.print('topWeiner.x: ' .. tostring(topWeiner.x), 0, increment)
+	love.graphics.print('topWeiner.y: ' .. tostring(topWeiner.y), 0, increment)
 	love.graphics.print('bottomWeiner.x: ' ..tostring(bottomWeiner.x), 0, increment * 2)
 
 	if stephen.winState then
