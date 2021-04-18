@@ -1,7 +1,5 @@
 PlayState = Class{__includes = BaseState}
 
-local increment = 60
-
 function PlayState:init()
 
 end
@@ -31,12 +29,6 @@ function PlayState:render()
 	levelOutline:render()
 	topWeiner:render()
 	bottomWeiner:render()
-
-	--Debug
-	love.graphics.setFont(tinyBubbleFont)
-	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
-	love.graphics.print('topWeiner.x: ' .. tostring(topWeiner.x), 0, increment)
-	love.graphics.print('bottomWeiner.x: ' ..tostring(bottomWeiner.x), 0, increment * 2)
 
 	if stephen.winState then
 		love.graphics.setColor(255/255, 255/255, 255/255, 255/255)

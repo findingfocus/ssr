@@ -1,6 +1,6 @@
 Stephen = Class{}
 
-PLAYER_SPEED = 1300
+PLAYER_SPEED = 650
 local grounded = true
 local ladderArea = false
 local onLadder = false
@@ -17,11 +17,11 @@ function Stephen:init(x, y, width, height)
 end
 
 function Stephen:collides(weiner)
-	if self.x > weiner.x + weiner.width or weiner.x > self.x + self.width then
+	if self.x >=  weiner.x + weiner.width or weiner.x >= self.x + self.width then
 		return false
 	end
 
-	if self.y > weiner.y + weiner.height or weiner.y > self.y + self.height then
+	if self.y >= weiner.y + weiner.height or weiner.y >= self.y + self.height then
 		return false
 	end
 
@@ -30,7 +30,7 @@ end
 
 function Stephen:reset()
 	self.x = 0
-	self.y = VIRTUAL_HEIGHT - 220
+	self.y = GROUND_FLOOR_STEPHENY
 	self.width = 200
 	self.height = 130
 	self.topLevel = false
@@ -91,11 +91,11 @@ function Stephen:update(dt)
 	if love.keyboard.isDown('down') and ladderArea then
 		onLadder = true
 		self.x = 220
-		if self.y == GROUND_FLOOR_STEPHENY then
+		self.y = math.min(GROUND_FLOOR_STEPHENY, self.y + PLAYER_SPEED * dt)
+		if self.y >= GROUND_FLOOR_STEPHENY then
 			self.topLevel = false
 			onLadder = false
 		end
-		self.y = math.min(GROUND_FLOOR_STEPHENY, self.y + PLAYER_SPEED * dt)
 	end
 
 	--triggers winState
