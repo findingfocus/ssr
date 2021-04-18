@@ -2,14 +2,16 @@ Weiner = Class{}
 
 local fallSpeed = 600
 local stackedOffset
+local increment = 60
 
 function Weiner:init(x, y, width, height)
 	self.width = 100
 	self.height = 100
 	self.x = x
 	self.y = y
-	pushedOff = false
-	fallen = false
+	self.pushedOff = false
+	self.fallen = false
+	self.burnt = false
 	stackedOffset = 0
 end
 
@@ -30,6 +32,7 @@ function Weiner:topReset()
 	self.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 7)
 	self.y = TOP_FLOORY - WEINER_GIRTH
 	self.fallen = false
+	self.burnt = false
 end
 
 function Weiner:bottomReset()
@@ -87,9 +90,27 @@ function Weiner:update(dt)
 		topWeiner.pushedOff = true
 		topWeiner.fallen = true
 	end
+
+	if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 3) then
+		topWeiner.burnt = true
+	end
+
 end
 
 function Weiner:render()
 	love.graphics.setColor(54/255, 138/255, 50/255, 255/255)
 	love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+
+	if topWeiner.burnt then
+		topWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 3)
+		stephen.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 3) - stephen.width
+		love.graphics.setFont(comicFont)
+		love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
+		love.graphics.printf('BURNED', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, VIRTUAL_WIDTH / 2, 'center')
+	end
+	--Debug
+	love.graphics.setFont(tinyBubbleFont)
+	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
+	love.graphics.print('Collision = ' .. tostring(topWeiner:collides(bottomWeiner)), 0, increment)
+	love.graphics.print('topWeiner.fallen: ' .. tostring(topWeiner.fallen), 0, increment * 2)
 end
