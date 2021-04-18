@@ -54,7 +54,7 @@ function Weiner:update(dt)
 	--clamps falling at floor level
 	if topWeiner.pushedOff then
 		topWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
-		topWeiner.y = math.min(VIRTUAL_HEIGHT - WEINER_GIRTH, topWeiner.y + fallSpeed * dt)
+		topWeiner.y = math.min(VIRTUAL_HEIGHT - WEINER_GIRTH + 1, topWeiner.y + fallSpeed * dt)
 	end
 ---[[
 	if topWeiner.y == VIRTUAL_HEIGHT - (WEINER_GIRTH * 2) then
@@ -65,14 +65,14 @@ function Weiner:update(dt)
 
 	if bottomWeiner.pushedOff then
 		bottomWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
-		bottomWeiner.y = math.min(VIRTUAL_HEIGHT - bottomWeiner.height, bottomWeiner.y + fallSpeed * dt)
+		bottomWeiner.y = math.min(VIRTUAL_HEIGHT - WEINER_GIRTH, bottomWeiner.y + fallSpeed * dt)
 	end
 
 	--stacks weiners if fallen on top of one another
 	if topWeiner:collides(bottomWeiner) then
 		topWeiner.pushedOff = false
 		stackedOffset = topWeiner.x - bottomWeiner.x 
-		topWeiner.y = bottomWeiner.y - 100
+		topWeiner.y = bottomWeiner.y - WEINER_GIRTH
 		topWeiner.x = bottomWeiner.x + stackedOffset
 	end
 
