@@ -1,7 +1,6 @@
 Weiner = Class{}
 
 local fallSpeed = 600
-local stackedOffset
 local increment = 60
 
 function Weiner:init(x, y, width, height)
@@ -12,7 +11,6 @@ function Weiner:init(x, y, width, height)
 	self.pushedOff = false
 	self.fallen = false
 	self.burnt = false
-	stackedOffset = 0
 end
 
 function Weiner:collides(weiner)
@@ -62,7 +60,6 @@ function Weiner:update(dt)
 		topWeiner.y = bottomWeiner.y - WEINER_GIRTH
 	end
 
-
 	--clamps falling at floor level
 	if topWeiner.pushedOff then
 		topWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
@@ -95,6 +92,7 @@ function Weiner:update(dt)
 	if topWeiner.y == VIRTUAL_HEIGHT - WEINER_GIRTH * 2 and bottomWeiner.fallen then
 		topWeiner.pushedOff = false
 	end
+
 
 end
 
