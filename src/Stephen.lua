@@ -91,11 +91,11 @@ function Stephen:update(dt)
 	if love.keyboard.isDown('down') and ladderArea then
 		onLadder = true
 		self.x = 220
-		if self.y == GROUND_FLOOR_STEPHENY then
+		self.y = math.min(GROUND_FLOOR_STEPHENY, self.y + PLAYER_SPEED * dt)
+		if self.y >= GROUND_FLOOR_STEPHENY then
 			self.topLevel = false
 			onLadder = false
 		end
-		self.y = math.min(GROUND_FLOOR_STEPHENY, self.y + PLAYER_SPEED * dt)
 	end
 
 	--triggers winState

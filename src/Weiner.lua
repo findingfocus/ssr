@@ -5,8 +5,8 @@ local stackedOffset
 local increment = 60
 
 function Weiner:init(x, y, width, height)
-	self.width = 100
-	self.height = 100
+	self.width = WEINER_GIRTH
+	self.height = WEINER_GIRTH
 	self.x = x
 	self.y = y
 	self.pushedOff = false
