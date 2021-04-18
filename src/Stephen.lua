@@ -30,7 +30,7 @@ end
 
 function Stephen:reset()
 	self.x = 0
-	self.y = VIRTUAL_HEIGHT - 220
+	self.y = GROUND_FLOOR_STEPHENY
 	self.width = 200
 	self.height = 130
 	self.topLevel = false
