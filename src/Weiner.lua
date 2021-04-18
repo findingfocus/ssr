@@ -16,11 +16,11 @@ function Weiner:init(x, y, width, height)
 end
 
 function Weiner:collides(weiner)
-		if topWeiner.x > bottomWeiner.x + bottomWeiner.width or bottomWeiner.x > topWeiner.x + topWeiner.width then
+		if topWeiner.x >= bottomWeiner.x + bottomWeiner.width or bottomWeiner.x >= topWeiner.x + topWeiner.width then
 			return false
 		end
 
-		if topWeiner.y > bottomWeiner.y + bottomWeiner.height or bottomWeiner.y > topWeiner.y + topWeiner.height then
+		if topWeiner.y >= bottomWeiner.y + bottomWeiner.height or bottomWeiner.y >= topWeiner.y + topWeiner.height then
 			return false
 		end
 
@@ -57,14 +57,14 @@ function Weiner:update(dt)
 	--clamps falling at floor level
 	if topWeiner.pushedOff then
 		topWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
-		topWeiner.y = math.min(VIRTUAL_HEIGHT - WEINER_GIRTH + 1, topWeiner.y + fallSpeed * dt)
+		topWeiner.y = math.min(VIRTUAL_HEIGHT - WEINER_GIRTH, topWeiner.y + fallSpeed * dt)
 	end
----[[
-	if topWeiner.y == VIRTUAL_HEIGHT - (WEINER_GIRTH * 2) then
-		topWeiner.y = VIRTUAL_HEIGHT - (WEINER_GIRTH * 2)
-		topWeiner.pushedOff = false
+
+	--trigger bottom weiner to fall if first pushed off
+	if bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 4) and not topWeiner.fallen then
+		bottomWeiner.pushedOff = true
+		bottomWeiner.fallen = true
 	end
---]]
 
 	if bottomWeiner.pushedOff then
 		bottomWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 4)
@@ -73,18 +73,13 @@ function Weiner:update(dt)
 
 	--stacks weiners if fallen on top of one another
 	if topWeiner:collides(bottomWeiner) then
-		topWeiner.pushedOff = false
 		stackedOffset = topWeiner.x - bottomWeiner.x 
+		topWeiner.pushedOff = false
+		topWeiner.fallen = false
 		topWeiner.y = bottomWeiner.y - WEINER_GIRTH
-		topWeiner.x = bottomWeiner.x + stackedOffset
 	end
 
 
-	--trigger bottom weiner to fall if first pushed off
-	if bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 4) and not topWeiner.fallen then
-		bottomWeiner.pushedOff = true
-		bottomWeiner.fallen = true
-	end
 	--trigger top weiner to fall if first pushed off
 	if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 4) and not topWeiner.fallen then
 		topWeiner.pushedOff = true
@@ -94,6 +89,12 @@ function Weiner:update(dt)
 	if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 3) then
 		topWeiner.burnt = true
 	end
+---[[
+	if topWeiner.y == VIRTUAL_HEIGHT - WEINER_GIRTH * 2 and bottomWeiner.fallen then
+		topWeiner.fallen = false
+		topWeiner.pushedOff = false
+	end
+--]]
 
 end
 
@@ -111,6 +112,8 @@ function Weiner:render()
 	--Debug
 	love.graphics.setFont(tinyBubbleFont)
 	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
-	love.graphics.print('Collision = ' .. tostring(topWeiner:collides(bottomWeiner)), 0, increment)
+	love.graphics.print('Collision = ' .. tostring(stephen:collides(topWeiner)), 0, increment)
 	love.graphics.print('topWeiner.fallen: ' .. tostring(topWeiner.fallen), 0, increment * 2)
+	love.graphics.print('stackedOffset = ' .. tostring(stackedOffset), 0, increment * 3)
+	love.graphics.print('topWeiner.y = ' .. tostring(topWeiner.y), 0, increment * 4)
 end

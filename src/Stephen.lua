@@ -1,6 +1,6 @@
 Stephen = Class{}
 
-PLAYER_SPEED = 1300
+PLAYER_SPEED = 1000
 local grounded = true
 local ladderArea = false
 local onLadder = false
@@ -17,11 +17,11 @@ function Stephen:init(x, y, width, height)
 end
 
 function Stephen:collides(weiner)
-	if self.x > weiner.x + weiner.width or weiner.x > self.x + self.width then
+	if self.x >=  weiner.x + weiner.width or weiner.x >= self.x + self.width then
 		return false
 	end
 
-	if self.y > weiner.y + weiner.height or weiner.y > self.y + self.height then
+	if self.y >= weiner.y + weiner.height or weiner.y >= self.y + self.height then
 		return false
 	end
 
