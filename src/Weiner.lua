@@ -4,6 +4,7 @@ local fallSpeed = 600
 local increment = 60
 
 function Weiner:init(x, y, width, height, toptoggle)
+	self.rotation = 0
 	self.toptoggle = toptoggle
 	self.imageCycle1 = jalapeno
 	self.imageCycle2 = jalapenoCooked1
@@ -31,6 +32,7 @@ function Weiner:collides(weiner)
 	end
 
 function Weiner:topReset()
+	self.rotation = 0
 	self.pushedOff = false
 	self.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 7)
 	self.y = TOP_FLOORY - WEINER_GIRTH
@@ -39,6 +41,7 @@ function Weiner:topReset()
 end
 
 function Weiner:bottomReset()
+	self.rotation = 0
 	self.pushedOff = false
 	self.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 6)
 	self.y = VIRTUAL_HEIGHT - FLOOR_HEIGHT - WEINER_GIRTH
@@ -51,6 +54,7 @@ function Weiner:update(dt)
 	--pushes weiners to the right once collided
 	if stephen:collides(topWeiner) then
 		topWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
+		topWeiner.rotation = topWeiner.rotation + dt * ROTATION_SPEED
 	end
 
 	if stephen:collides(bottomWeiner) then
@@ -109,16 +113,16 @@ function Weiner:render()
 	if self.toptoggle == 1 then
 		--condition for first cooked half
 		if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 6) and topWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 5) then
-			love.graphics.draw(topWeiner.imageCycle2, self.x, self.y)
+			love.graphics.draw(topWeiner.imageCycle2, self.x + WEINER_GIRTH / 2, self.y + WEINER_GIRTH / 2, self.rotation, 1, 1, WEINER_GIRTH / 2, WEINER_GIRTH / 2)
 		--second cooked half
 		elseif topWeiner.x >= VIRTUAL_WIDTH - (PLATE_WIDTH * 5) and topWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 3) then
-			love.graphics.draw(topWeiner.imageCycle3, self.x, self.y)
+			love.graphics.draw(topWeiner.imageCycle3, self.x + WEINER_GIRTH / 2, self.y + WEINER_GIRTH / 2, self.rotation, 1, 1, WEINER_GIRTH / 2, WEINER_GIRTH / 2)
 		--burnt
 		elseif topWeiner.x == VIRTUAL_WIDTH - (PLATE_WIDTH * 3) then
-			love.graphics.draw(topWeiner.imageCycle4, self.x, self.y)
+			love.graphics.draw(topWeiner.imageCycle4, self.x + WEINER_GIRTH / 2, self.y + WEINER_GIRTH / 2, self.rotation, 1, 1, WEINER_GIRTH / 2, WEINER_GIRTH / 2)
 		--uncooked
 		else
-			love.graphics.draw(topWeiner.imageCycle1, self.x, self.y)
+			love.graphics.draw(topWeiner.imageCycle1, self.x + WEINER_GIRTH / 2, self.y + WEINER_GIRTH / 2, self.rotation, 1, 1, WEINER_GIRTH / 2, WEINER_GIRTH / 2)
 		end
 	end
 	
@@ -126,13 +130,13 @@ function Weiner:render()
 	if self.toptoggle == 2 then
 		--condition for first cooked half
 		if bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 3) and bottomWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 2) then
-			love.graphics.draw(bottomWeiner.imageCycle2, self.x, self.y)
+			love.graphics.draw(bottomWeiner.imageCycle2, self.x, self.y, self.rotation)
 		--second cooked half
 		elseif bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 2) then
-			love.graphics.draw(bottomWeiner.imageCycle3, self.x, self.y)
+			love.graphics.draw(bottomWeiner.imageCycle3, self.x, self.y, self.rotation)
 		--uncooked
 		else
-			love.graphics.draw(bottomWeiner.imageCycle1, self.x, self.y)
+			love.graphics.draw(bottomWeiner.imageCycle1, self.x, self.y, self.rotation)
 		end
 	end
 
