@@ -14,6 +14,22 @@ function Stephen:init(x, y, width, height)
 	self.topLevel = false
 	self.image = love.graphics.newImage('/pictures/SSR_Stephen.png')
 	self.winState = false
+	psystem1 = love.graphics.newParticleSystem(particle, 50)
+	psystem2 = love.graphics.newParticleSystem(particle, 50)
+
+	psystem1:setParticleLifetime(1, 4)
+	psystem1:setEmissionRate(0)
+	psystem1:setSizeVariation(1)
+	psystem1:setLinearAcceleration(-20, -40, 20, 0)
+	psystem1:setColors(1, 1, 1, 1, 1, 1, 1, 0)
+	psystem1:setEmissionArea('normal', 10, 0)
+
+	psystem2:setParticleLifetime(1, 4)
+	psystem2:setEmissionRate(0)
+	psystem2:setSizeVariation(1)
+	psystem2:setLinearAcceleration(-20, -40, 20, 0)
+	psystem2:setColors(1, 1, 1, 1, 1, 1, 1, 0)
+	psystem2:setEmissionArea('normal', 10, 0)
 end
 
 function Stephen:collides(weiner)
@@ -37,7 +53,13 @@ function Stephen:reset()
 	self.winState = false
 end
 
+
 function Stephen:update(dt)
+
+
+	psystem1:update(dt)
+	psystem1:setEmissionRate(0)
+	psystem2:setEmissionRate(0)
 
 	if self.x > 210 and self.x < 230 then
 		ladderArea = true
@@ -59,6 +81,8 @@ function Stephen:update(dt)
 		if self.topLevel == true then
 			self.x = math.min(VIRTUAL_WIDTH - 575, self.x + PLAYER_SPEED * dt)
 			if self.x == VIRTUAL_WIDTH - 575 then
+				--insert particles
+				psystem1:setEmissionRate(850)
 				self.x = VIRTUAL_WIDTH - 680
 			end
 		else
@@ -69,7 +93,9 @@ function Stephen:update(dt)
 				self.x = math.min(VIRTUAL_WIDTH - self.width - 80, self.x + PLAYER_SPEED * dt)
 			end
 
-			if self.x == VIRTUAL_WIDTH - self.width - 80 then  
+			--burnt toes
+			if self.x == VIRTUAL_WIDTH - self.width - 80 then 
+				psystem2:setEmissionRate(850) 
 				self.x = VIRTUAL_WIDTH - self.width - 185
 			end
 		end
@@ -106,6 +132,11 @@ function Stephen:update(dt)
 end
 
 function Stephen:render()
+
+	love.graphics.draw(psystem1, VIRTUAL_WIDTH - (PLATE_WIDTH * 6) + 40, TOP_FLOORY - 5)
+
+	love.graphics.draw(psystem2, VIRTUAL_WIDTH - (PLATE_WIDTH * 3) + 40, VIRTUAL_HEIGHT - FLOOR_HEIGHT - 5)
+
 	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
 	love.graphics.draw(self.image, self.x, self.y + 18)
 end

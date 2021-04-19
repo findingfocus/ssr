@@ -15,6 +15,7 @@ function love.load()
 	jalapenoCooked2 = love.graphics.newImage('/pictures/jalapenoCooked2.png')
 	jalapenoBurnt = love.graphics.newImage('/pictures/jalapenoBurnt.png')
 	n = love.graphics.newImage('/pictures/n.png')
+	particle = love.graphics.newImage('/pictures/particle.png')
 
 	bubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 40)
 	tinyBubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 24)
@@ -100,6 +101,6 @@ end
 
 function displayFPS()
 	love.graphics.setFont(bubbleFont)
-	love.graphics.setColor(0/255, 255/255, 0/255, 255/255)
+	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
 	love.graphics.print('FPS: ' .. tostring(love.timer.getFPS()), 10, 10)
 end
