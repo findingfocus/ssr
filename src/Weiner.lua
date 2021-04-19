@@ -3,11 +3,12 @@ Weiner = Class{}
 local fallSpeed = 600
 local increment = 60
 
-function Weiner:init(x, y, width, height, top)
-	self.top = true
+function Weiner:init(x, y, width, height, toptoggle)
+	self.toptoggle = toptoggle
 	self.imageCycle1 = jalapeno
-	self.imageCycle2 = jalapenoburnt1
-	self.imageCycle3 = jalapenoburnt2
+	self.imageCycle2 = jalapenoCooked1
+	self.imageCycle3 = jalapenoCooked2
+	self.imageCycle4 = jalapenoBurnt
 	self.width = WEINER_GIRTH
 	self.height = WEINER_GIRTH
 	self.x = x
@@ -104,20 +105,35 @@ function Weiner:render()
 	--love.graphics.setColor(54/255, 138/255, 50/255, 255/255)
 	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
 
-	--check for image cycle 1 top weiner
-
-	if self.top then
+	--top weiner cooked picture progression
+	if self.toptoggle == 1 then
+		--condition for first cooked half
 		if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 6) and topWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 5) then
 			love.graphics.draw(topWeiner.imageCycle2, self.x, self.y)
-		elseif topWeiner.x >= VIRTUAL_WIDTH - (PLATE_WIDTH * 5) then
+		--second cooked half
+		elseif topWeiner.x >= VIRTUAL_WIDTH - (PLATE_WIDTH * 5) and topWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 3) then
 			love.graphics.draw(topWeiner.imageCycle3, self.x, self.y)
-		else 
+		--burnt
+		elseif topWeiner.x == VIRTUAL_WIDTH - (PLATE_WIDTH * 3) then
+			love.graphics.draw(topWeiner.imageCycle4, self.x, self.y)
+		--uncooked
+		else
 			love.graphics.draw(topWeiner.imageCycle1, self.x, self.y)
 		end
 	end
-		
-	if not self.top then
-		love.graphics.draw(bottomWeiner.imageCycle1, self.x, self.y)
+	
+	-- bottomWeiner cooked picture progression
+	if self.toptoggle == 2 then
+		--condition for first cooked half
+		if bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 3) and bottomWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 2) then
+			love.graphics.draw(bottomWeiner.imageCycle2, self.x, self.y)
+		--second cooked half
+		elseif bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 2) then
+			love.graphics.draw(bottomWeiner.imageCycle3, self.x, self.y)
+		--uncooked
+		else
+			love.graphics.draw(bottomWeiner.imageCycle1, self.x, self.y)
+		end
 	end
 
 
@@ -131,6 +147,8 @@ function Weiner:render()
 		love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
 		love.graphics.printf('BURNED', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, VIRTUAL_WIDTH / 2, 'center')
 	end
+
+	--love.graphics.print('topWeiner.x = ' .. tostring(topWeiner.x), 0, increment * 3)
 	--Debug
 	--[[
 	love.graphics.setFont(tinyBubbleFont)
