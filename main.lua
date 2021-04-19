@@ -10,6 +10,9 @@ function love.load()
 	titleScreen = love.graphics.newImage('/pictures/SSR_title.png')
 	tongs = love.graphics.newImage('/pictures/SSR_tongs.png')
 	halo = love.graphics.newImage('/pictures/SSR_Halo.png')
+	jalapeno = love.graphics.newImage('/pictures/jalapenoSideView.png')
+	jalapenoburnt1 = love.graphics.newImage('/pictures/jalapenoSideViewBurnt.png')
+	jalapenoburnt2 = love.graphics.newImage('/pictures/jalapenoBurntSideView.png')
 
 	bubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 40)
 	tinyBubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 24)
@@ -37,9 +40,9 @@ function love.load()
 
 	stephen = Stephen(0, GROUND_FLOOR_STEPHENY, 200, 130)
 
-	bottomWeiner = Weiner(VIRTUAL_WIDTH - (PLATE_WIDTH * 6), VIRTUAL_HEIGHT - FLOOR_HEIGHT - WEINER_GIRTH, WEINER_GIRTH, WEINER_GIRTH)
+	bottomWeiner = Weiner(VIRTUAL_WIDTH - (PLATE_WIDTH * 6), VIRTUAL_HEIGHT - FLOOR_HEIGHT - WEINER_GIRTH, WEINER_GIRTH, WEINER_GIRTH, not true)
 	
-	topWeiner  = Weiner(VIRTUAL_WIDTH - (PLATE_WIDTH * 7), TOP_FLOORY - WEINER_GIRTH, WEINER_GIRTH, WEINER_GIRTH)
+	topWeiner  = Weiner(VIRTUAL_WIDTH - (PLATE_WIDTH * 7), TOP_FLOORY - WEINER_GIRTH, WEINER_GIRTH, WEINER_GIRTH, true)
 	--Weiner(VIRTUAL_WIDTH - 380 - (3 * PLATE_WIDTH), stephen.height + 30 - PLATE_WIDTH, 100, 100)
 
 	levelOutline = Level()

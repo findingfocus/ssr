@@ -3,7 +3,11 @@ Weiner = Class{}
 local fallSpeed = 600
 local increment = 60
 
-function Weiner:init(x, y, width, height)
+function Weiner:init(x, y, width, height, top)
+	self.top = true
+	self.imageCycle1 = jalapeno
+	self.imageCycle2 = jalapenoburnt1
+	self.imageCycle3 = jalapenoburnt2
 	self.width = WEINER_GIRTH
 	self.height = WEINER_GIRTH
 	self.x = x
@@ -97,8 +101,28 @@ function Weiner:update(dt)
 end
 
 function Weiner:render()
-	love.graphics.setColor(54/255, 138/255, 50/255, 255/255)
-	love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
+	--love.graphics.setColor(54/255, 138/255, 50/255, 255/255)
+	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
+
+	--check for image cycle 1 top weiner
+
+	if self.top then
+		if topWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 6) and topWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 5) then
+			love.graphics.draw(topWeiner.imageCycle2, self.x, self.y)
+		elseif topWeiner.x >= VIRTUAL_WIDTH - (PLATE_WIDTH * 5) then
+			love.graphics.draw(topWeiner.imageCycle3, self.x, self.y)
+		else 
+			love.graphics.draw(topWeiner.imageCycle1, self.x, self.y)
+		end
+	end
+		
+	if not self.top then
+		love.graphics.draw(bottomWeiner.imageCycle1, self.x, self.y)
+	end
+
+
+	
+
 
 	if topWeiner.burnt then
 		topWeiner.x = VIRTUAL_WIDTH - (PLATE_WIDTH * 3)
