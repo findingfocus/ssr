@@ -7,17 +7,19 @@ function love.load()
 
 	love.mouse.setVisible(false)
 
-	titleScreen = love.graphics.newImage('/pictures/SSR_title.png')
+	titleScreen = love.graphics.newImage('/pictures/SSR_titleEmpty.png')
 	tongs = love.graphics.newImage('/pictures/SSR_tongs.png')
 	halo = love.graphics.newImage('/pictures/SSR_Halo.png')
 	jalapeno = love.graphics.newImage('/pictures/jalapeno.png')
 	jalapenoCooked1 = love.graphics.newImage('/pictures/jalapenoCooked1.png')
 	jalapenoCooked2 = love.graphics.newImage('/pictures/jalapenoCooked2.png')
 	jalapenoBurnt = love.graphics.newImage('/pictures/jalapenoBurnt.png')
+	n = love.graphics.newImage('/pictures/n.png')
 
 	bubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 40)
 	tinyBubbleFont = love.graphics.newFont('fonts/thebubbleletters.ttf', 24)
 	comicFont = love.graphics.newFont('fonts/amateurcomic.ttf', 40)
+	titleFont = love.graphics.newFont('fonts/amateurcomic.ttf', 80)
 	love.graphics.setFont(bubbleFont)
 
 	sounds = {
