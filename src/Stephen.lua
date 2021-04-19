@@ -99,7 +99,7 @@ function Stephen:update(dt)
 	end
 
 	--triggers winState
-	if topWeiner.x == 880 and bottomWeiner.x == 1180 then
+	if topWeiner.x == 880 and bottomWeiner.x > 1140 then
 		self.winState = true
 	end
 

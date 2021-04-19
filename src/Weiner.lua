@@ -59,6 +59,11 @@ function Weiner:update(dt)
 
 	if stephen:collides(bottomWeiner) then
 		bottomWeiner.x = math.min(VIRTUAL_WIDTH - WEINER_GIRTH, stephen.x + stephen.width)
+		if bottomWeiner.x == VIRTUAL_WIDTH - WEINER_GIRTH then
+			--locks rotation if pushed all the way to the right
+		else
+			bottomWeiner.rotation = bottomWeiner.rotation + dt * ROTATION_SPEED
+		end
 	end
 
 	--stacks weiners if fallen on top of one another
@@ -130,13 +135,13 @@ function Weiner:render()
 	if self.toptoggle == 2 then
 		--condition for first cooked half
 		if bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 3) and bottomWeiner.x < VIRTUAL_WIDTH - (PLATE_WIDTH * 2) then
-			love.graphics.draw(bottomWeiner.imageCycle2, self.x, self.y, self.rotation)
+			love.graphics.draw(bottomWeiner.imageCycle2, self.x + WEINER_GIRTH / 2, self.y + WEINER_GIRTH / 2, self.rotation, 1, 1, WEINER_GIRTH / 2, WEINER_GIRTH / 2)
 		--second cooked half
 		elseif bottomWeiner.x > VIRTUAL_WIDTH - (PLATE_WIDTH * 2) then
-			love.graphics.draw(bottomWeiner.imageCycle3, self.x, self.y, self.rotation)
+			love.graphics.draw(bottomWeiner.imageCycle3, self.x + WEINER_GIRTH / 2, self.y + WEINER_GIRTH / 2, self.rotation, 1, 1, WEINER_GIRTH / 2, WEINER_GIRTH / 2)
 		--uncooked
 		else
-			love.graphics.draw(bottomWeiner.imageCycle1, self.x, self.y, self.rotation)
+			love.graphics.draw(bottomWeiner.imageCycle1, self.x + WEINER_GIRTH / 2, self.y + WEINER_GIRTH / 2, self.rotation, 1, 1, WEINER_GIRTH / 2, WEINER_GIRTH / 2)
 		end
 	end
 
