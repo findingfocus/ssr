@@ -1,5 +1,7 @@
 require 'src/dependencies'
 
+--testing signing key commit
+
 function love.load()
 	love.graphics.setDefaultFilter('nearest', 'nearest')
 
