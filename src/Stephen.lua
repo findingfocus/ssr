@@ -24,12 +24,14 @@ function Stephen:init(x, y, width, height)
 	psystem1:setColors(1, 1, 1, 1, 1, 1, 1, 0)
 	psystem1:setEmissionArea('normal', 10, 0)
 
+    --[[
 	psystem2:setParticleLifetime(1, 4)
 	psystem2:setEmissionRate(0)
 	psystem2:setSizeVariation(1)
 	psystem2:setLinearAcceleration(-30, -40, 20, 0)
 	psystem2:setColors(1, 1, 1, 1, 1, 1, 1, 0)
 	psystem2:setEmissionArea('normal', 10, 0)
+    --]]
 end
 
 function Stephen:collides(weiner)
@@ -136,7 +138,7 @@ function Stephen:render()
 
 	love.graphics.draw(psystem1, VIRTUAL_WIDTH - (PLATE_WIDTH * 6) + 40, TOP_FLOORY - 5)
 
-	love.graphics.draw(psystem2, VIRTUAL_WIDTH - self.width - 80, VIRTUAL_HEIGHT - FLOOR_HEIGHT)
+	--love.graphics.draw(psystem2, VIRTUAL_WIDTH - self.width - 80, VIRTUAL_HEIGHT - FLOOR_HEIGHT)
 
 	love.graphics.setColor(255/255, 255/255, 255/255, 255/255)
 	love.graphics.draw(self.image, self.x, self.y + 18)
